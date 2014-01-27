@@ -105,7 +105,16 @@
 					}
 				});
 			}
-			window.onpopstate = processTarget;
+
+			// Suppress first pop on pageload
+			var firstload = true
+			window.onpopstate = function() {
+				if (firstload) {
+					firstload = false;
+					return;
+				}
+				processTarget();
+			}
 
 			// Set input field to url hash
 			field.value = decodeURIComponent(document.location.hash);
