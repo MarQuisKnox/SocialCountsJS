@@ -21,7 +21,11 @@ small {
 }
 
 pre.prettyprint {
-	border: none !important;
+	border-width: 0 0 0 2px !important;
+	background-color: #fcfcfc;
+	border-left: 2px solid #999;
+	padding-left: 10px !important;
+	font-size: 12px;
 }
 
 #wrapper {
