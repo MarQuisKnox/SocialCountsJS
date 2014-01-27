@@ -22,7 +22,7 @@
 	var prot_chk   = /^[htfps]+:\/\/.*/,
 
 	    // URL to Open Data Table
-	    odt_url    = 'http://files.swook.net/socialcounts.xml',
+	    odt_url    = 'http://swook.github.io/SocialCountsJS/socialcounts.xml',
 
 	    // Function which processes jsonp responses
 	    listenerId = 'socialcounts_receiver',
