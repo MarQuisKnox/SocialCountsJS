@@ -20,7 +20,7 @@
 			data in just one simple query.</p>
 
 			<p><a href="http://developer.yahoo.com/yql/">YQL</a> and
-			<a href="http://json-p.org/">JSONP</a> is used in SocialCountsJS
+			<a href="http://json-p.org/">JSONP</a> are used in SocialCountsJS
 			to query data from services.</p>
 
 			<p>No backend configurations.<br>
@@ -31,7 +31,7 @@
 			<p>1) Include SocialCountsJS in your document.
 			<pre class="prettyprint">&lt;script type="text/javascript" src="socialcounts.js"&gt;&lt;/script&gt;</pre></p>
 
-			<p style="margin-top:30px;">2) Call the socialcounts function.<p>
+			<p style="margin-top:30px;">2) Call the <code>socialcounts</code> function.<p>
 			<p>You can pass an <small>(optional)</small> URL parameter to query stats of
 			specific URLs, and a function <small>(mandatory)</small> which will be run on
 			completion of the query.</p>
@@ -40,9 +40,9 @@
 			<pre class="prettyprint">window.socialcounts(url, function(data) {
 	console.log(data);
 });</pre></p>
-			<p>where <code>data</code> looks like this:
+			<p>where <code>data</code> looks like the following:
 			<pre class="prettyprint">{
-	url: "https://swook.github.io/SocialCountsJS",
+	url: "http://swook.github.io/SocialCountsJS",
 	counts: {
 		googleplus: 9000,
 		facebook: 4000,
@@ -54,7 +54,7 @@
 			<h2 id="demo">Demo</h2>
 			<p>This simple demo runs a query when requested, and shows
 			you the results in an appealing way.<p>
-			<p>The demo also shows all available services. More can be added on request.</p>
+			<p>The demo also shows all queryable services via SocialCountsJS. More can be added on request.</p>
 
 			<div id="result">
 				<div id="request"></div>
@@ -79,7 +79,7 @@
 			over yonder at <a href="https://github.com/swook/SocialCountsJS">GitHub</a>.</p>
 
 			<hr style="margin-top:70px;">
-			<p>&copy; 2013 - <a href="http://www.swook.net/">Seon-Wook Park</a></p>
+			<p>&copy; 2014 <a href="http://www.swook.net/">Seon-Wook Park</a></p>
 		</div>
 		<script type="text/javascript">
 			var reqdiv = document.getElementById('request'),
@@ -118,6 +118,6 @@
 				processTarget();
 			}
 		</script>
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
 	</body>
 </html>
