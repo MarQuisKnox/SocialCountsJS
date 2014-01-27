@@ -86,6 +86,7 @@ pre.prettyprint {
 	height: 20px;
 	line-height: 20px;
 	color: white;
+	text-decoration: none;
 	transition: all .5s;
 }
 .social:hover {
