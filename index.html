@@ -1,0 +1,123 @@
+<!--
+   SocialCountsJS webpage
+   - Written by Seon-Wook Park (http://www.swook.net/)
+   - Licensed under LGPLv3
+-->
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SocialCountsJS | Social stats in one query</title>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<script type="text/javascript" src="socialcounts.js"></script>
+	</head>
+	<body>
+		<a href="https://github.com/swook/SocialCountsJS"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+		<div id="wrapper">
+			<h1 id="about">SocialCountsJS</h1>
+			<p><big>SocialCountsJS</big> frees web developers from
+			the look and feel of stock social network widgets by providing
+			data in just one simple query.</p>
+
+			<p><a href="http://developer.yahoo.com/yql/">YQL</a> and
+			<a href="http://json-p.org/">JSONP</a> is used in SocialCountsJS
+			to query data from services.</p>
+
+			<p>No backend configurations.<br>
+			No dependencies <small>(Not even jQuery)</small>.<br>
+			No hassle.</p>
+
+			<h2 id="usage">Usage</h2>
+			<p>1) Include SocialCountsJS in your document.
+			<pre class="prettyprint">&lt;script type="text/javascript" src="socialcounts.js"&gt;&lt;/script&gt;</pre></p>
+
+			<p style="margin-top:30px;">2) Call the socialcounts function.<p>
+			<p>You can pass an <small>(optional)</small> URL parameter to query stats of
+			specific URLs, and a function <small>(mandatory)</small> which will be run on
+			completion of the query.</p>
+			<p>In this example, the received data is printed into the browser's
+			console.</p>
+			<pre class="prettyprint">window.socialcounts(url, function(data) {
+	console.log(data);
+});</pre></p>
+			<p>where <code>data</code> looks like this:
+			<pre class="prettyprint">{
+	url: "https://swook.github.io/SocialCountsJS",
+	counts: {
+		googleplus: 9000,
+		facebook: 4000,
+		[...]
+		twitter: 5000
+	}
+};</pre></p>
+
+			<h2 id="demo">Demo</h2>
+			<p>This simple demo runs a query when requested, and shows
+			you the results in an appealing way.<p>
+			<p>The demo also shows all available services. More can be added on request.</p>
+
+			<div id="result">
+				<div id="request"></div>
+				<span class="social" id="googleplus"></span>
+				<span class="social" id="facebook"></span>
+				<span class="social" id="twitter"></span>
+				<span class="social" id="linkedin"></span>
+				<span class="social" id="reddit"></span>
+				<span class="social" id="stumbleupon"></span>
+				<span class="social" id="delicious"></span>
+				<span class="social" id="pinterest"></span>
+			</div>
+			<form id="form" method="GET">
+				<input id="field" type="text" name="url" placeholder="Website URL">
+				<input id="submit" type="submit" value="Check">
+			</form>
+
+			<h2>Improve SocialCountsJS</h2>
+			<p>Do help me improve SocialCountsJS. All suggestions are welcome.</p>
+			<p>It would be even more cool if you submitted some <a href="https://github.com/swook/SocialCountsJS/issues">
+			Issues</a> or <a href="https://github.com/swook/SocialCountsJS/pulls">Pull Requests</a>
+			over yonder at <a href="https://github.com/swook/SocialCountsJS">GitHub</a>.</p>
+
+			<hr style="margin-top:70px;">
+			<p>&copy; 2013 - <a href="http://www.swook.net/">Seon-Wook Park</a></p>
+		</div>
+		<script type="text/javascript">
+			var reqdiv = document.getElementById('request'),
+			    form   = document.getElementById('form'),
+			    field  = document.getElementById('field');
+
+			// Run query after page load
+			setTimeout(processTarget, 0);
+
+			// Function to run socialcounts query based on url hash
+			function processTarget() {
+				var hash = window.location.hash;
+				if (!hash.length) hash = window.location.href;
+				if (hash[0] == '#') hash = hash.slice(1);
+
+				var url = decodeURIComponent(hash);
+				socialcounts(url, function(c){
+					reqdiv.innerHTML = url;
+					var el;
+					for (sn in c.counts) {
+						el = document.getElementById(sn);
+						if (el) el.innerHTML = c.counts[sn].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					}
+				});
+			}
+			window.onpopstate = processTarget;
+
+			// Set input field to url hash
+			field.value = decodeURIComponent(document.location.hash);
+			if (field.value[0] == '#') field.value = field.value.slice(1);
+
+			// Set onsubmit handler for form
+			form.onsubmit = function(e) {
+				e.preventDefault();
+				document.location.hash = encodeURIComponent(field.value);
+				processTarget();
+			}
+		</script>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+	</body>
+</html>

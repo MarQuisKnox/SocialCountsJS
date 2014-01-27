@@ -1,0 +1,229 @@
+/*
+   SocialCountsJS webpage CSS style
+   - Written by Seon-Wook Park (http://www.swook.net/)
+   - Licensed under LGPLv3
+*/
+
+h1 {
+	margin: 50px 0 20px 0;
+}
+
+h2 {
+	margin-top: 50px;
+}
+
+p {
+	margin: 10px 0;
+}
+
+small {
+	color: #666;
+}
+
+pre.prettyprint {
+	border: none !important;
+}
+
+#wrapper {
+	padding: 0;
+	margin: auto;
+	width: 80%;
+	min-width: 300px;
+	max-width: 750px;
+	font: 14px Arial,Sans-Serif;
+	line-height: 20px;
+}
+
+#result {
+	min-width: 200px;
+	max-width: 400px;
+	width: 40%;
+	margin: 0 auto;
+}
+
+#request:before {
+	position: absolute;
+	display: block;
+	content: 'Social counts for...';
+	float: left;
+	text-align: left;
+	font-size: 10px;
+	color: #555;
+	line-height: 10px;
+}
+
+#request {
+	width: 100%;
+	height: 40px;
+	padding: 16px 3px 3px 3px;
+	font-size: 16px;
+	line-height: 50px;
+	white-space: nowrap;
+}
+
+.social:before {
+	position: relative;
+	display: block;
+	content: '';
+	float: left;
+	top: -5px;
+	width: 30px;
+	height: 30px;
+	background-size: 30px;
+	transition: all .5s;
+}
+.social:hover:before {
+	-ms-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+}
+
+.social {
+	display: block;
+	text-align: right;
+	padding: 5px;
+	margin: 5px 0;
+	height: 20px;
+	line-height: 20px;
+	color: white;
+	transition: all .5s;
+	cursor: default;
+}
+.social:hover {
+	text-shadow: 0 0 5px white;
+}
+
+.social:after {
+	position: relative;
+	display: block;
+	float: right;
+	text-align: left;
+	margin-left: 4px;
+	width: 80px;
+}
+.social:hover:after {
+	text-shadow: none;
+}
+
+#googleplus:before {
+	background-image: url('img/googleplus-256.png');
+}
+#googleplus {
+	background-color: #dc4b39;
+}
+#googleplus:after {
+	content: '+1s';
+}
+
+#facebook:before {
+	background-image: url('img/facebook-256.png');
+}
+#facebook {
+	background-color: #4862a3;
+}
+#facebook:after {
+	content: 'likes';
+}
+
+#twitter:before {
+	background-image: url('img/twitter-256.png');
+}
+#twitter {
+	background-color: #00acee;
+}
+#twitter:after {
+	content: 'tweets';
+}
+
+#linkedin:before {
+	background-image: url('img/linkedin-256.png');
+}
+#linkedin {
+	background-color: #0073b2;
+}
+#linkedin:after {
+	content: 'shares';
+}
+
+#reddit:before {
+	background-image: url('img/reddit-256.png');
+}
+#reddit {
+	background-color: #336699;
+}
+#reddit:after {
+	content: 'points';
+}
+
+#stumbleupon:before {
+	background-image: url('img/stumbleupon-256.png');
+}
+#stumbleupon {
+	background-color: #ea4b24;
+}
+#stumbleupon:after {
+	content: 'stumbles';
+}
+
+#delicious:before {
+	background-image: url('img/delicious-256.png');
+}
+#delicious {
+	background-color: #3399ff;
+}
+#delicious:after {
+	content: 'bookmarks';
+}
+
+#pinterest:before {
+	background-image: url('img/pinterest-256.png');
+}
+#pinterest {
+	background-color: #c52227;
+}
+#pinterest:after {
+	content: 'pins';
+}
+
+#form {
+	min-width: 200px;
+	max-width: 400px;
+	width: 40%;
+	margin: 0 auto;
+}
+
+#field {
+	width: 100%;
+	height: 20px;
+	outline: none;
+	background: transparent;
+	padding: 4px;
+	margin: 10px 0 -4px 0;
+	border: 0 transparent;
+	border-bottom: 2px black solid;
+	color: #888;
+	transition: all .5s;
+}
+#field:hover,
+#field:focus {
+	color: black;
+}
+
+#submit {
+	position: relative;
+	float: right;
+	height: 27px;
+	width: 80px;
+	outline: none;
+	border: none;
+	background-color: black;
+	color: white;
+	padding: 4px;
+	top: -23px;
+	right: -84px;
+	cursor: pointer;
+	transition: all .5s;
+}
+#submit:hover {
+	background-color: #555;
+}
