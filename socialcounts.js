@@ -107,7 +107,7 @@
 				}
 
 				// Remove temporary script element
-				document.getElementById(j.sel_id).remove();
+				document.body.removeChild(document.getElementById(j.sel_id));
 
 				// Run provided function
 				j.func(r);
