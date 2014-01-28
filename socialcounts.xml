@@ -32,7 +32,8 @@
 			var ourl = url,
 			    url = [encodeURIComponent(ourl)],
 			    st = (new Date).getTime(),
-			    UA = 'SocialCountsJS';
+			    UA = 'SocialCountsJS',
+			    timeout = 1000; // 1 second
 
 			// If URL ends with /, try non / path too.
 			if (ourl[ourl.length - 1] == '/') url.push(encodeURIComponent(ourl.slice(0, -1)));
@@ -58,51 +59,45 @@
 			}
 
 			function facebook(r) {
-				add('facebook', parseInt(r.response.like_count) + parseInt(r.response.share_count));
+				add('facebook', Number(r.response.like_count) + Number(r.response.share_count));
 				y.log('facebook: '+ ((new Date).getTime() - st));
 			}
 
 			function twitter(r) {
-				add('twitter', r.response.count);
+				add('twitter', Number(r.response.count));
 				y.log('twitter: '+ ((new Date).getTime() - st));
 			}
 
 			function linkedin(r) {
-				add('linkedin', r.response.count);
+				add('linkedin', Number(r.response.count));
 				y.log('linkedin: '+ ((new Date).getTime() - st));
 			}
 
 			function reddit(r) {
-				var d = y.xmlToJson(r.response);
-				if (r.status == '429') {
-					if ((new Date).getTime() - st < 1e3) {
-						y.rest(r.url).header('User-Agent', UA).get();
+				if (r.status == 429) {
+					if ((new Date).getTime() - st < timeout) {
+						y.rest(r.url).accept('application/json').header('User-Agent', UA).get();
 					}
 					else y.log('reddit request timed out.');
 					return;
 				}
-				else if (!d.json || !d.json.data || !d.json.data.children) return;
-				d = d.json.data.children;
-				var t = 0;
-				for (var i = 0; i < d.length; i++) {
-					if (d[i].data) t += parseInt(d[i].data.score);
+				var l = y.xpath(r.response, '//score/text()'), t = 0;
+				for (var i = 0; i < l.length(); i++) {
+					t += Number(l[i]);
 				}
 				add('reddit', t);
 				y.log('reddit: '+ ((new Date).getTime() - st));
 			}
 
 			function stumbleupon(r) {
-				r = y.xmlToJson(r.response);
-				if (!r.json || !r.json.result || !r.json.result.views) return;
-				r = r.json.result.views;
-				add('stumbleupon', r);
+				if (y.xpath(r.response, '//result/views') < 1) return;
+				add('stumbleupon', r.response.result.views);
 				y.log('stumbleupon: '+ ((new Date).getTime() - st));
 			}
 
 			function delicious(r) {
 				if (!r.response) return;
-				var c = r.response..total_posts;
-				add('delicious', c);
+				add('delicious', Number(r.response..total_posts));
 				y.log('delicious: '+ ((new Date).getTime() - st));
 			}
 
@@ -116,7 +111,7 @@
 			for (var i = 0; i < url.length; i++) {
 				y.rest("https://apis.google.com/u/0/_/+1/fastbutton?url="+url[i], googleplus)
 					.accept('text/html').get();
-					y.rest("https://api.facebook.com/method/fql.query?format=json&query=select%20like_count,share_count%20from%20link_stat%20where%20url=%27"+url[i]+"%27", facebook)
+				y.rest("https://api.facebook.com/method/fql.query?format=json&query=select%20like_count,share_count%20from%20link_stat%20where%20url=%27"+url[i]+"%27", facebook)
 					.accept('application/json').get();
 				y.rest("http://urls.api.twitter.com/1/urls/count.json?url="+url[i], twitter)
 					.accept('application/json').get();
@@ -131,7 +126,7 @@
 				y.rest("http://api.pinterest.com/v1/urls/count.json?url="+url[i], pinterest)
 					.accept('application/json').get();
 			}
-			y.sync();
+			y.sync(true);
 
 			// Reduce and sum
 			for (k in o) {
