@@ -114,7 +114,11 @@
 					var el;
 					for (sn in c.counts) {
 						el = document.getElementById(sn);
-						if (el) el.innerHTML = c.counts[sn].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+						if (el) {
+							el.innerHTML = c.counts[sn].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+							if (c.counts[sn] == 1) el.classList.add('single');
+							else el.classList.remove('single');
+						}
 					}
 				});
 			}
