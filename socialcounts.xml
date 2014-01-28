@@ -7,7 +7,7 @@
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
 	<meta>
 		<author>Seon-Wook Park</author>
-		<sampleQuery>SELECT * FROM {table} WHERE url='http://www.google.com';</sampleQuery>
+		<sampleQuery>SELECT * FROM {table} WHERE url='http://swook.github.io/SocialCountsJS/';</sampleQuery>
 	</meta>
 
 	<bindings>
@@ -16,87 +16,143 @@
 				<key id='url' type='xs:string' paramType='variable' required='true' />
 			</inputs>
 			<execute><![CDATA[
-				var urle = encodeURIComponent(url);
-				response.maxAge = 300;
-				response.object = {'url':url,'counts':{
-					googleplus: 0,
-					facebook: 0,
-					twitter: 0,
-					linkedin: 0,
-					reddit: 0,
-					stumbleupon: 0,
-					delicious: 0,
-					pinterest: 0
-				}};
+			response.maxAge = 300;
+			response.object = {'url': url};
+			var o = {
+				googleplus: 0,
+				facebook: 0,
+				twitter: 0,
+				linkedin: 0,
+				reddit: 0,
+				stumbleupon: 0,
+				delicious: 0,
+				pinterest: 0
+			};
 
-				var st = (new Date).getTime();
-				y.rest("https://apis.google.com/u/0/_/+1/fastbutton?url="+url, function (r) {
-					r = y.xpath(r.response, '//div[@id="root"]//script');
-					m = r.toString().match(/.*window.__SSR\s*=\s*{\s*c\s*:\s*([0-9\.]+)\s*,/);
-					if (!m) return;
-					response.object.counts.googleplus = m[1] ? parseInt(m[1]) : 0;
-					y.log('googleplus: '+ ((new Date).getTime() - st));
-				}).accept('text/html').get();
+			var ourl = url,
+			    url = [encodeURIComponent(ourl)],
+			    st = (new Date).getTime(),
+			    UA = 'SocialCountsJS';
 
-				y.rest("https://graph.facebook.com/?id="+urle, function(r) {
-					r = y.xmlToJson(r.response).json;
-					if (!r) return;
-					var c = r.shares || r.likes;
-					response.object.counts.facebook = c ? parseInt(c) : 0;
-					y.log('facebook: '+ ((new Date).getTime() - st));
-				}).accept('application/json').get();
+			// If URL ends with /, try non / path too.
+			if (ourl[ourl.length - 1] == '/') url.push(encodeURIComponent(ourl.slice(0, -1)));
 
-				y.rest("http://urls.api.twitter.com/1/urls/count.json?url="+urle, function(r) {
-					var c = r.response.count;
-					response.object.counts.twitter = c ? parseInt(c) : 0;
-					y.log('twitter: '+ ((new Date).getTime() - st));
-				}).accept('application/json').get();
+			function add(k, c) {
+				if (c == '0' || c == 0) return;
+				if ((typeof c) != 'number' && c) c = parseInt(c);
+				if (o[k] instanceof Array) {
+					if (o[k][o[k].length - 1] != c) o[k].push(c);
+				} else {
+					o[k] = [c];
+				}
+			}
 
-				y.rest("http://www.linkedin.com/countserv/count/share?format=json&url="+urle, function(r) {
-					response.object.counts.linkedin = parseInt(r.response.count);
-					y.log('linkedin: '+ ((new Date).getTime() - st));
-				}).accept('application/json').get();
+			function googleplus(r) {
+				r = y.xpath(r.response, '//div[@id="root"]//script');
+				m = r.toString().match(/.*window.__SSR\s*=\s*{\s*c\s*:\s*([0-9\.]+)\s*,/);
+				if (!m) return;
+				add('googleplus', m[1]);
+				y.log('googleplus: '+ ((new Date).getTime() - st));
+			}
 
-				function reddit() {
-				y.rest("http://www.reddit.com/api/info.json?url="+urle, function(r) {
-					r = y.xmlToJson(r.response);
-					if (r.error) {
-						if ((new Date).getTime() - st < 1e3) reddit();
-						else y.log('reddit request timed out.');
-						return;
+			function facebook(r) {
+				r = y.xmlToJson(r.response).json;
+				if (!r) return;
+				var c = r.shares || r.likes;
+				add('facebook', c);
+				y.log('facebook: '+ ((new Date).getTime() - st));
+			}
+
+			function twitter(r) {
+				add('twitter', r.response.count);
+				y.log('twitter: '+ ((new Date).getTime() - st));
+			}
+
+			function linkedin(r) {
+				add('linkedin', r.response.count);
+				y.log('linkedin: '+ ((new Date).getTime() - st));
+			}
+
+			function reddit(r) {
+				var d = y.xmlToJson(r.response);
+				if (r.status == '429') {
+					if ((new Date).getTime() - st < 1e3) {
+						y.rest(r.url).header('User-Agent', UA).get();
 					}
-				       	else if (!r.json || !r.json.data || !r.json.data.children) return;
-					r = r.json.data.children;
-			       		var i = 0, n = r.length;
-					for (; i < n; i++) {
-						if (r[i].data) response.object.counts.reddit += parseInt(r[i].data.score);
+					else y.log('reddit request timed out.');
+					return;
+				}
+				else if (!d.json || !d.json.data || !d.json.data.children) return;
+				d = d.json.data.children;
+				var t = 0;
+				for (var i = 0; i < d.length; i++) {
+					if (d[i].data) t += parseInt(d[i].data.score);
+				}
+				add('reddit', t);
+				y.log('reddit: '+ ((new Date).getTime() - st));
+			}
+
+			function stumbleupon(r) {
+				r = y.xmlToJson(r.response);
+				if (!r.json || !r.json.result || !r.json.result.views) return;
+				r = r.json.result.views;
+				add('stumbleupon', r);
+				y.log('stumbleupon: '+ ((new Date).getTime() - st));
+			}
+
+			function delicious(r) {
+				if (!r.response) return;
+				var c = r.response..total_posts;
+				add('delicious', c);
+				y.log('delicious: '+ ((new Date).getTime() - st));
+			}
+
+			function pinterest(r) {
+				var m = r.response.toString().match(/"count": ([0-9]+)/);
+				if (m && m.length) add('pinterest', m[1]);
+				y.log('pinterest: '+ ((new Date).getTime() - st));
+			}
+
+			// Send all requests
+			for (var i = 0; i < url.length; i++) {
+				y.rest("https://apis.google.com/u/0/_/+1/fastbutton?url="+url[i], googleplus)
+					.accept('text/html').get();
+				y.rest("https://graph.facebook.com/?id="+url[i], facebook)
+					.accept('application/json').get();
+				y.rest("http://urls.api.twitter.com/1/urls/count.json?url="+url[i], twitter)
+					.accept('application/json').get();
+				y.rest("http://www.linkedin.com/countserv/count/share?format=json&url="+url[i], linkedin)
+					.accept('application/json').get();
+				y.rest("http://www.reddit.com/api/info.json?url="+url[i], reddit).accept('application/json')
+					.header('User-Agent', UA).get();
+				y.rest("http://www.stumbleupon.com/services/1.01/badge.getinfo?url="+url[i], stumbleupon)
+					.accept('application/json').get();
+				y.rest("http://feeds.delicious.com/v2/json/urlinfo/data?url="+url[i], delicious)
+					.accept('application/json').get();
+				y.rest("http://api.pinterest.com/v1/urls/count.json?url="+url[i], pinterest)
+					.accept('application/json').get();
+			}
+
+			y.sync();
+			y.log(o);
+			// Reduce and sum
+			for (k in o) {
+				if (o[k] instanceof Array) {
+					if (o[k].length == 1) {
+						o[k] = o[k][0];
+						continue;
 					}
-					y.log('reddit: '+ ((new Date).getTime() - st));
-				}).accept('application/json').header('User-Agent', 'SocialCountsJS').get();
-				}; reddit();
-
-				y.rest("http://www.stumbleupon.com/services/1.01/badge.getinfo?url="+urle, function(r) {
-					r = y.xmlToJson(r.response);
-					if (!r.json || !r.json.result || !r.json.result.views) return;
-					r = r.json.result.views;
-					response.object.counts.stumbleupon = r ? parseInt(r) : 0;
-					y.log('stumbleupon: '+ ((new Date).getTime() - st));
-				}).accept('application/json').get();
-
-				y.rest("http://feeds.delicious.com/v2/json/urlinfo/data?url="+urle, function(r) {
-					if (!r.response) return;
-					var c = r.response..total_posts;
-					response.object.counts.delicious = c ? parseInt(c) : 0;
-					y.log('delicious: '+ ((new Date).getTime() - st));
-				}).accept('application/json').get();
-
-				y.rest("http://api.pinterest.com/v1/urls/count.json?url="+urle, function(r) {
-					var m = r.response.toString().match(/"count": ([0-9]+)/);
-					response.object.counts.pinterest = (m && m.length > 1) ? parseInt(m[1]) : 0;
-					y.log('pinterest: '+ ((new Date).getTime() - st));
-				}).accept('application/json').get();
-
-				y.sync();
+					var ma = {}, c = o[k];
+					for (var i = 0; i < c.length; i++) {
+						ma[c[i]] = c[i];
+					}
+					o[k] = 0;
+					for (c in ma) {
+						o[k] += ma[c];
+					}
+				}
+			}
+			response.object.counts = o;
 			]]></execute>
 		</select>
 	</bindings>
