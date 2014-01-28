@@ -7,13 +7,13 @@ SocialCountsJS is licensed under [![LGPLv3](http://www.gnu.org/graphics/lgplv3-8
 
 ## Usage
 
-1. Include SocialCountsJS in your document.
+### Include SocialCountsJS in your document.
 
 ```html
 <script type="text/javascript" src="http://swook.github.io/SocialCountsJS/socialcounts.js"></script>
 ```
 
-2. Call the `socialcounts` function.
+### Call the `socialcounts` function.
 
 This can be done in two ways.
 
