@@ -58,10 +58,7 @@
 			}
 
 			function facebook(r) {
-				r = y.xmlToJson(r.response).json;
-				if (!r) return;
-				var c = r.shares || r.likes;
-				add('facebook', c);
+				add('facebook', parseInt(r.response.like_count) + parseInt(r.response.share_count));
 				y.log('facebook: '+ ((new Date).getTime() - st));
 			}
 
@@ -119,7 +116,7 @@
 			for (var i = 0; i < url.length; i++) {
 				y.rest("https://apis.google.com/u/0/_/+1/fastbutton?url="+url[i], googleplus)
 					.accept('text/html').get();
-				y.rest("https://graph.facebook.com/?id="+url[i], facebook)
+					y.rest("https://api.facebook.com/method/fql.query?format=json&query=select%20like_count,share_count%20from%20link_stat%20where%20url=%27"+url[i]+"%27", facebook)
 					.accept('application/json').get();
 				y.rest("http://urls.api.twitter.com/1/urls/count.json?url="+url[i], twitter)
 					.accept('application/json').get();
