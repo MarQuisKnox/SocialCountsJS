@@ -90,13 +90,13 @@
 		if ('query' in data && 'results' in data.query) {
 			var r = data.query.results.result;
 			// For some reason YQL won't show numbers as numbers... gotta parse em.
-			for (sn in r.counts) {
+			for (var sn in r.counts) {
 				r.counts[sn] = parseFloat(r.counts[sn]);
 			}
 
 			// Pop func to run from list of funcs
 			var j = null, n = job_list.length;
-			for (i = 0; i < n; i++) {
+			for (var i = 0; i < n; i++) {
 				// Retrieve a job
 				j = job_list.pop();
 
