@@ -18,6 +18,8 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/*! SocialCountsJS / @author: Seon-Wook Park / @license: LGPLv3 */
+
 (function(){
 	var prot_chk   = /^[htfps]+:\/\/.*/,
 
