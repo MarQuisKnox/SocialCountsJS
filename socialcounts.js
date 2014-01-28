@@ -61,8 +61,8 @@
 		}
 
 		// Attempt to reduce duplicate urls...
-		var l = url.length;
-		if (url[l - 1] == '/') url = url.slice(0, -1);
+		//var l = url.length;
+		//if (url[l - 1] == '/') url = url.slice(0, -1);
 		if (!prot_chk.test(url)) url = 'http://'+ url;
 
 		// Generate function name for function calling on response
