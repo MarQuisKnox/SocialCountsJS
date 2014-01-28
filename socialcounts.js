@@ -31,7 +31,7 @@
 
 	    // URL elements to use in constructing final query URL
 	    qurl_pre   = 'http://query.yahooapis.com/v1/public/yql?q=USE%20%27',
-	    qurl_post  = '%27%3B&format=json&callback='+ listenerId,
+	    qurl_post  = '%27%3B&format=json&jsonCompat=new&callback='+ listenerId,
 
 	    // List of pending jobs
 	    job_list  = [];
@@ -89,12 +89,8 @@
 
 	// window[listenerId] responds to jsonp requests made for SocialCountsJS
 	window[listenerId] = function (data) {
-		if ('query' in data && 'results' in data.query) {
+		if ('query' in data && 'results' in data.query && 'result' in data.query.results) {
 			var r = data.query.results.result;
-			// For some reason YQL won't show numbers as numbers... gotta parse em.
-			for (var sn in r.counts) {
-				r.counts[sn] = parseFloat(r.counts[sn]);
-			}
 
 			// Pop func to run from list of funcs
 			var j = null, n = job_list.length;
@@ -114,6 +110,6 @@
 				// Run provided function
 				j.func(r);
 			}
-		}
+		} // TODO: else failed. Retry maybe?
 	}
 })(null);
