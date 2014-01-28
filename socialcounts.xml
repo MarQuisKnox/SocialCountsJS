@@ -41,7 +41,9 @@
 				if (c == '0' || c == 0) return;
 				if ((typeof c) != 'number' && c) c = parseInt(c);
 				if (o[k] instanceof Array) {
-					if (o[k][o[k].length - 1] != c) o[k].push(c);
+					// Add only if more than 1% difference.
+					var p = o[k][o[k].length - 1];
+					if (Math.abs(c - p) / c > 0.01) o[k].push(c);
 				} else {
 					o[k] = [c];
 				}
