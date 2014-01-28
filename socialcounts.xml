@@ -131,9 +131,8 @@
 				y.rest("http://api.pinterest.com/v1/urls/count.json?url="+url[i], pinterest)
 					.accept('application/json').get();
 			}
-
 			y.sync();
-			y.log(o);
+
 			// Reduce and sum
 			for (k in o) {
 				if (o[k] instanceof Array) {
