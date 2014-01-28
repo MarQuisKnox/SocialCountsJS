@@ -33,7 +33,7 @@ window.socialcounts(function(data) {
 
 `data` is in the following form:
 
-```json
+```javascript
 {
 	url: "http://swook.github.io/SocialCountsJS",
 	counts: {
