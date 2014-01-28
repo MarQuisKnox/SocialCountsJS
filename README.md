@@ -9,7 +9,9 @@ SocialCountsJS is licensed under [![LGPLv3](http://www.gnu.org/graphics/lgplv3-8
 
 1. Include SocialCountsJS in your document.
 
-    &lt;script type="text/javascript" src="http://swook.github.io/SocialCountsJS/socialcounts.js"&gt;&lt;/script&gt;
+```html
+<script type="text/javascript" src="http://swook.github.io/SocialCountsJS/socialcounts.js"></script>
+```
 
 2. Call the `socialcounts` function.
 
@@ -17,29 +19,35 @@ This can be done in two ways.
 
 The following takes a specific URL and makes a request. A function is passed in as the second parameter and will be invoked on success.
 
-    window.socialcounts(url, function(data) {
-    });
+```javascript
+window.socialcounts(url, function(data) {
+});
+```
 
 The following takes just a function argument, and queries counts for the current page.
 
-    window.socialcounts(function(data) {
-    });
+```javascript
+window.socialcounts(function(data) {
+});
+```
 
 `data` is in the following form:
 
-    {
-    	url: "http://swook.github.io/SocialCountsJS",
-    	counts: {
-    		googleplus: 98,
-    		facebook: 45,
-    		twitter: 67,
-    		linkedin: 23,
-    		reddit: 34,
-    		stumbleupon: 54,
-    		delicious: 123,
-    		pinterest: 1
-    	}
-    };
+```json
+{
+	url: "http://swook.github.io/SocialCountsJS",
+	counts: {
+		googleplus: 98,
+		facebook: 45,
+		twitter: 67,
+		linkedin: 23,
+		reddit: 34,
+		stumbleupon: 54,
+		delicious: 123,
+		pinterest: 1
+	}
+};
+```
 
 ## Demo
 You can view a demo at [swook.github.io/SocialCountsJS](http://swook.github.io/SocialCountsJS/)
