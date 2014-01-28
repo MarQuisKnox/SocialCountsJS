@@ -103,7 +103,7 @@ pre.prettyprint {
 	float: right;
 	text-align: left;
 	margin-left: 4px;
-	width: 80px;
+	width: 95px;
 }
 .social:hover:after {
 	text-shadow: none;
@@ -126,7 +126,7 @@ pre.prettyprint {
 	background-color: #4862a3;
 }
 #facebook:after {
-	content: 'likes';
+	content: 'shares & likes';
 }
 
 #twitter:before {
