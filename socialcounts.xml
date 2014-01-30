@@ -51,6 +51,7 @@
 			}
 
 			function googleplus(r) {
+				if (r.status != 200) return;
 				r = y.xpath(r.response, '//div[@id="root"]//script');
 				m = r.toString().match(/.*window.__SSR\s*=\s*{\s*c\s*:\s*([0-9\.]+)\s*,/);
 				if (!m) return;
@@ -59,16 +60,19 @@
 			}
 
 			function facebook(r) {
+				if (r.status != 200) return;
 				add('facebook', Number(r.response.like_count) + Number(r.response.share_count));
 				y.log('facebook: '+ ((new Date).getTime() - st));
 			}
 
 			function twitter(r) {
+				if (r.status != 200) return;
 				add('twitter', Number(r.response.count));
 				y.log('twitter: '+ ((new Date).getTime() - st));
 			}
 
 			function linkedin(r) {
+				if (r.status != 200) return;
 				add('linkedin', Number(r.response.count));
 				y.log('linkedin: '+ ((new Date).getTime() - st));
 			}
@@ -91,18 +95,19 @@
 			}
 
 			function stumbleupon(r) {
-				if (!r.response || y.xpath(r.response, '//result/views') < 1) return;
+				if (r.status != 200 || !r.response || y.xpath(r.response, '//result/views') < 1) return;
 				add('stumbleupon', r.response.result.views);
 				y.log('stumbleupon: '+ ((new Date).getTime() - st));
 			}
 
 			function delicious(r) {
-				if (!r.response) return;
+				if (r.status != 200 || !r.response) return;
 				add('delicious', Number(r.response..total_posts));
 				y.log('delicious: '+ ((new Date).getTime() - st));
 			}
 
 			function pinterest(r) {
+				if (r.status != 200) return;
 				var m = r.response.toString().match(/"count": ([0-9]+)/);
 				if (m && m.length) add('pinterest', m[1]);
 				y.log('pinterest: '+ ((new Date).getTime() - st));
