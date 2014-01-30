@@ -81,6 +81,7 @@
 					else y.log('reddit request timed out.');
 					return;
 				}
+				else if (r.status != 200) return;
 				var l = y.xpath(r.response, '//score/text()'), t = 0;
 				for (var i = 0; i < l.length(); i++) {
 					t += Number(l[i]);
@@ -90,7 +91,7 @@
 			}
 
 			function stumbleupon(r) {
-				if (y.xpath(r.response, '//result/views') < 1) return;
+				if (!r.response || y.xpath(r.response, '//result/views') < 1) return;
 				add('stumbleupon', r.response.result.views);
 				y.log('stumbleupon: '+ ((new Date).getTime() - st));
 			}
