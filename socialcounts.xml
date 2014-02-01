@@ -19,14 +19,14 @@
 			response.maxAge = 300;
 			response.object = {'url': url};
 			var o = {
-				googleplus: 0,
-				facebook: 0,
-				twitter: 0,
-				linkedin: 0,
-				reddit: 0,
-				stumbleupon: 0,
-				delicious: 0,
-				pinterest: 0
+				googleplus: -1,
+				facebook: -1,
+				twitter: -1,
+				linkedin: -1,
+				reddit: -1,
+				stumbleupon: -1,
+				delicious: -1,
+				pinterest: -1
 			};
 
 			var ourl = url,
@@ -80,7 +80,7 @@
 			function reddit(r) {
 				if (r.status == 429) {
 					if ((new Date).getTime() - st < timeout) {
-						y.rest(r.url).accept('application/json').header('User-Agent', UA).get();
+						y.rest(r.url).accept('application/json').header('User-Agent', UA).timeout(timeout).get();
 					}
 					else y.log('reddit request timed out.');
 					return;
@@ -116,21 +116,21 @@
 			// Send all requests
 			for (var i = 0; i < url.length; i++) {
 				y.rest("https://apis.google.com/u/0/_/+1/fastbutton?url="+url[i], googleplus)
-					.accept('text/html').get();
+					.accept('text/html').timeout(timeout).get();
 				y.rest("https://api.facebook.com/method/fql.query?format=json&query=select%20like_count,share_count%20from%20link_stat%20where%20url=%27"+url[i]+"%27", facebook)
-					.accept('application/json').get();
+					.accept('application/json').timeout(timeout).get();
 				y.rest("http://urls.api.twitter.com/1/urls/count.json?url="+url[i], twitter)
-					.accept('application/json').get();
+					.accept('application/json').timeout(timeout).get();
 				y.rest("http://www.linkedin.com/countserv/count/share?format=json&url="+url[i], linkedin)
-					.accept('application/json').get();
+					.accept('application/json').timeout(timeout).get();
 				y.rest("http://www.reddit.com/api/info.json?url="+url[i], reddit).accept('application/json')
-					.header('User-Agent', UA).get();
+					.header('User-Agent', UA).timeout(timeout).get();
 				y.rest("http://www.stumbleupon.com/services/1.01/badge.getinfo?url="+url[i], stumbleupon)
-					.accept('application/json').get();
+					.accept('application/json').timeout(timeout).get();
 				y.rest("http://feeds.delicious.com/v2/json/urlinfo/data?url="+url[i], delicious)
-					.accept('application/json').get();
+					.accept('application/json').timeout(timeout).get();
 				y.rest("http://api.pinterest.com/v1/urls/count.json?url="+url[i], pinterest)
-					.accept('application/json').get();
+					.accept('application/json').timeout(timeout).get();
 			}
 			y.sync(true);
 
@@ -150,6 +150,7 @@
 						o[k] += ma[c];
 					}
 				}
+				else if (o[k] == -1) o[k] = 0;
 			}
 			response.object.counts = o;
 			]]></execute>
