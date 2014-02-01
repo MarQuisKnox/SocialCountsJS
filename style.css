@@ -109,42 +109,42 @@ pre.prettyprint {
 	text-shadow: none;
 }
 
-#googleplus:before { background-image: url('img/googleplus-256.png'); }
+#googleplus:before { background-image: url('widgets/img/googleplus-256.png'); }
 #googleplus { background-color: #dc4b39; }
 #googleplus:after { content: '+1s'; }
 #googleplus.single:after { content: '+1'; }
 
-#facebook:before { background-image: url('img/facebook-256.png'); }
+#facebook:before { background-image: url('widgets/img/facebook-256.png'); }
 #facebook { background-color: #4862a3; }
 #facebook:after { content: 'shares & likes'; }
 #facebook.single:after { content: 'share or like'; }
 
-#twitter:before { background-image: url('img/twitter-256.png'); }
+#twitter:before { background-image: url('widgets/img/twitter-256.png'); }
 #twitter { background-color: #00acee; }
 #twitter:after { content: 'tweets'; }
 #twitter.single:after { content: 'tweet' }
 
-#linkedin:before { background-image: url('img/linkedin-256.png'); }
+#linkedin:before { background-image: url('widgets/img/linkedin-256.png'); }
 #linkedin { background-color: #0073b2; }
 #linkedin:after { content: 'shares'; }
 #linkedin.single:after { content: 'share'; }
 
-#reddit:before { background-image: url('img/reddit-256.png'); }
+#reddit:before { background-image: url('widgets/img/reddit-256.png'); }
 #reddit { background-color: #336699; }
 #reddit:after { content: 'points'; }
 #reddit.single:after { content: 'point'; }
 
-#stumbleupon:before { background-image: url('img/stumbleupon-256.png'); }
+#stumbleupon:before { background-image: url('widgets/img/stumbleupon-256.png'); }
 #stumbleupon { background-color: #ea4b24; }
 #stumbleupon:after { content: 'stumbles'; }
 #stumbleupon.single:after { content: 'stumble'; }
 
-#delicious:before { background-image: url('img/delicious-256.png'); }
+#delicious:before { background-image: url('widgets/img/delicious-256.png'); }
 #delicious { background-color: #3399ff; }
 #delicious:after { content: 'bookmarks'; }
 #delicious.single:after { content: 'bookmark'; }
 
-#pinterest:before { background-image: url('img/pinterest-256.png'); }
+#pinterest:before { background-image: url('widgets/img/pinterest-256.png'); }
 #pinterest { background-color: #c52227; }
 #pinterest:after { content: 'pins'; }
 #pinterest.single:after { content: 'pin'; }
