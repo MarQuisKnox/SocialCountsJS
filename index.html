@@ -115,10 +115,11 @@
 				socialcounts(url, function(c){
 					reqdiv.innerHTML = url;
 					var el;
+					c = socialcounts.fmt.comma(c);
 					for (sn in c.counts) {
 						el = document.getElementById(sn);
 						if (el) {
-							el.innerHTML = c.counts[sn].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+							el.innerHTML = c.counts[sn].toString();
 							if (c.counts[sn] == 1) el.classList.add('single');
 							else el.classList.remove('single');
 						}
