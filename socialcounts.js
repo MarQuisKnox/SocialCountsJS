@@ -122,7 +122,7 @@
 		// - For 23,654 for example, yield 24k
 		// - For 432,987 for example, yield 433k
 		short: function(data) {
-			var num, num_str, num_com, n, p, t, r;
+			var num, num_str, n, p, t, r;
 			for (var sn in data.counts) {
 				num = data.counts[sn];
 				if (typeof num !== 'number') continue;
