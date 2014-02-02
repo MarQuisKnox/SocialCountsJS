@@ -85,7 +85,7 @@
 			subt:   t,
 			trial:  1
 		});
-	}
+	};
 
 	// window[listenerId] responds to jsonp requests made for SocialCountsJS
 	window[listenerId] = function (data) {
@@ -112,4 +112,61 @@
 			}
 		} // TODO: else failed. Retry maybe?
 	}
+
+	var sufs = ['k', 'm', 'b', 't'];
+	window.socialcounts.fmt = {
+		// socialcounts.fmt.short formats numbers (correctly rounded) in
+		// the following way:
+		// - Use suffix for kilo, million, etc (defined as sufs)
+		// - For 1,234 for example, yield 1.2k
+		// - For 23,654 for example, yield 24k
+		// - For 432,987 for example, yield 433k
+		short: function(data) {
+			var num, num_str, num_com, n, p, t, r;
+			for (var sn in data.counts) {
+				num = data.counts[sn];
+				if (typeof num !== 'number') continue;
+
+				num_str = num.toString();
+				n       = num_str.length;
+				p       = n - 1;
+
+				if (n < 4) {
+					data.counts[sn] = num_str;
+					continue;
+				}
+
+				t = Math.floor(p / 3);
+				r = p % 3;
+				if (r === 0) {
+					p = Math.pow(10, p - 1);
+					num_str = (Math.round(num / p) * p).toString();
+					data.counts[sn] = num_str.slice(0, 1) +'.'+ num_str.slice(1, 2);
+				} else if (r === 1) {
+					p = Math.pow(10, p - 1);
+					num_str = (Math.round(num / p) * p).toString();
+					data.counts[sn] = num_str.slice(0, 2);
+				} else if (r === 2) {
+					p = Math.pow(10, p - 2);
+					num_str = (Math.round(num / p) * p).toString();
+					data.counts[sn] = num_str.slice(0, 3);
+				}
+				data.counts[sn] += sufs[t - 1];
+			}
+			return data;
+		},
+
+		// socialcounts.fmt.comma adds a comma every 3 digits as commonly
+		// expected in large number formatting.
+		comma: function(data) {
+			var num;
+			for (var sn in data.counts) {
+				num = data.counts[sn];
+				if (typeof num !== 'number') continue;
+
+				data.counts[sn] = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+			return data;
+		}
+	};
 })(null);
