@@ -33,18 +33,18 @@
 			    url = [encodeURIComponent(ourl)],
 			    st = (new Date).getTime(),
 			    UA = 'SocialCountsJS',
-			    timeout = 1000; // 1 second
+			    timeout = 1500; // 1.5 seconds
 
 			// If URL ends with /, try non / path too.
 			if (ourl[ourl.length - 1] == '/') url.push(encodeURIComponent(ourl.slice(0, -1)));
 
 			function add(k, c) {
-				if (c == '0' || c == 0) return;
-				if ((typeof c) != 'number' && c) c = parseInt(c);
-				if (o[k] instanceof Array) {
+				if (c === 0) return;
+				var ok = o[k];
+				if (ok instanceof Array) {
 					// Add only if more than 1% difference.
-					var p = o[k][o[k].length - 1];
-					if (Math.abs(c - p) / c > 0.01) o[k].push(c);
+					if (Math.abs(c - ok[ok.length - 1]) / c > 0.01)
+						o[k].push(c);
 				} else {
 					o[k] = [c];
 				}
@@ -52,7 +52,7 @@
 
 			function googleplus(r) {
 				if (r.status != 200) return;
-				r = y.xpath(r.response, '//div[@id="root"]//script');
+				r = y.xpath(r.response, '//div[@id="root"]//script/text()');
 				m = r.toString().match(/.*window.__SSR\s*=\s*{\s*c\s*:\s*([0-9\.]+)\s*,/);
 				if (!m) return;
 				add('googleplus', m[1]);
@@ -96,7 +96,7 @@
 
 			function stumbleupon(r) {
 				if (r.status != 200 || !r.response || y.xpath(r.response, '//result/views') < 1) return;
-				add('stumbleupon', r.response.result.views);
+				add('stumbleupon', Number(r.response.result.views));
 				y.log('stumbleupon: '+ ((new Date).getTime() - st));
 			}
 
@@ -109,7 +109,7 @@
 			function pinterest(r) {
 				if (r.status != 200) return;
 				var m = r.response.toString().match(/"count": ([0-9]+)/);
-				if (m && m.length) add('pinterest', m[1]);
+				if (m && m.length) add('pinterest', parseInt(m[1]));
 				y.log('pinterest: '+ ((new Date).getTime() - st));
 			}
 
