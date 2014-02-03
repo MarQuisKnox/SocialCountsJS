@@ -176,14 +176,14 @@ pre.prettyprint {
 #submit {
 	position: relative;
 	float: right;
-	height: 27px;
+	height: 28px;
 	width: 80px;
 	outline: none;
 	border: none;
 	background-color: black;
 	color: white;
 	padding: 4px;
-	top: -23px;
+	top: -24px;
 	right: -84px;
 	cursor: pointer;
 	transition: all .5s;
