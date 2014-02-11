@@ -54,8 +54,8 @@
 				if (r.status != 200) return;
 				r = y.xpath(r.response, '//div[@id="root"]//script/text()');
 				m = r.toString().match(/.*window.__SSR\s*=\s*{\s*c\s*:\s*([0-9\.]+)\s*,/);
-				if (!m) return;
-				add('googleplus', m[1]);
+				if (!m || m.length < 2) return;
+				add('googleplus', parseInt(m[1]));
 				y.log('googleplus: '+ ((new Date).getTime() - st));
 			}
 
