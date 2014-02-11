@@ -37,14 +37,14 @@ window.socialcounts(function(data) {
 {
 	url: "http://swook.github.io/SocialCountsJS",
 	counts: {
-		googleplus: 98,
-		facebook: 45,
-		twitter: 67,
-		linkedin: 23,
-		reddit: 34,
-		stumbleupon: 54,
-		delicious: 123,
-		pinterest: 1
+		googleplus: 98.0,
+		facebook: 45.0,
+		twitter: 67.0,
+		linkedin: 23.0,
+		reddit: 34.0,
+		stumbleupon: 54.0,
+		delicious: 123.0,
+		pinterest: 1.0
 	}
 };
 ```
