@@ -30,7 +30,7 @@
 	    listenerId = 'socialcounts_receiver',
 
 	    // URL elements to use in constructing final query URL
-	    qurl_pre   = 'http://query.yahooapis.com/v1/public/yql?q=USE%20%27',
+	    qurl_pre   = '//query.yahooapis.com/v1/public/yql?q=USE%20%27',
 	    qurl_post  = '%27%3B&format=json&jsonCompat=new&callback='+ listenerId,
 
 	    // List of pending jobs
