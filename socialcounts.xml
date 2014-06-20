@@ -23,9 +23,9 @@
 				facebook: -1,
 				twitter: -1,
 				linkedin: -1,
-				reddit: -1,
+			//	reddit: -1,
 				stumbleupon: -1,
-				delicious: -1,
+			//	delicious: -1,
 				pinterest: -1
 			};
 
@@ -108,7 +108,7 @@
 
 			function pinterest(r) {
 				if (r.status != 200) return;
-				var m = r.response.toString().match(/"count": ([0-9]+)/);
+				var m = r.response.toString().match(/"count":\s*([0-9]+)/);
 				if (m && m.length) add('pinterest', parseInt(m[1]));
 				y.log('pinterest: '+ ((new Date).getTime() - st));
 			}
@@ -123,12 +123,12 @@
 					.accept('application/json').timeout(timeout).get();
 				y.rest("http://www.linkedin.com/countserv/count/share?format=json&url="+url[i], linkedin)
 					.accept('application/json').timeout(timeout).get();
-				y.rest("http://www.reddit.com/api/info.json?url="+url[i], reddit).accept('application/json')
-					.header('User-Agent', UA).timeout(timeout).get();
+				// y.rest("http://www.reddit.com/api/info.json?url="+url[i], reddit).accept('application/json')
+				// y.rest(".header('User-Agent', UA).timeout(timeout).get();
 				y.rest("http://www.stumbleupon.com/services/1.01/badge.getinfo?url="+url[i], stumbleupon)
 					.accept('application/json').timeout(timeout).get();
-				y.rest("http://feeds.delicious.com/v2/json/urlinfo/data?url="+url[i], delicious)
-					.accept('application/json').timeout(timeout).get();
+				// y.rest("http://feeds.delicious.com/v2/json/urlinfo/data?url="+url[i], delicious)
+				// y.rest(".accept('application/json').timeout(timeout).get();
 				y.rest("http://api.pinterest.com/v1/urls/count.json?url="+url[i], pinterest)
 					.accept('application/json').timeout(timeout).get();
 			}
