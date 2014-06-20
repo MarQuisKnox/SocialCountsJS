@@ -41,9 +41,7 @@ window.socialcounts(function(data) {
 		facebook: 45.0,
 		twitter: 67.0,
 		linkedin: 23.0,
-		reddit: 34.0,
 		stumbleupon: 54.0,
-		delicious: 123.0,
 		pinterest: 1.0
 	}
 };
