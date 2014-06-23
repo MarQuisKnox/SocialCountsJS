@@ -1,0 +1,45 @@
+/*
+   SocialCountsJS widgets common CSS
+   - Written by Seon-Wook Park (http://www.swook.net/)
+   - Licensed under LGPLv3
+*/
+
+body {
+  padding: 0;
+  margin:  0;
+}
+
+.social {
+  position: relative;
+  cursor:   pointer;
+
+  text-decoration: none;
+  text-align:      center;
+  font-family:     sans-serif,Arial,Verdana,Helvetica;
+  color:           white;
+  font-size:       .9rem;
+  line-height:     .9rem;
+
+  margin:   0;
+  padding: .55rem 0;
+  height:  .9rem;
+}
+
+.social img.icon {
+  position: absolute;
+  display:  block;
+  float:    left;
+  top:      0;
+  left:     0;
+  width:    2rem;
+  height:   2rem;
+}
+
+#googleplus { background-color: #dc4b39; }
+#facebook { background-color: #4862a3; }
+#twitter { background-color: #00acee; }
+#linkedin { background-color: #0073b2; }
+#reddit { background-color: #336699; }
+#stumbleupon { background-color: #ea4b24; }
+#delicious { background-color: #3399ff; }
+#pinterest { background-color: #c52227; }
