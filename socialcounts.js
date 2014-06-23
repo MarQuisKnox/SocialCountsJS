@@ -21,8 +21,8 @@
 /*! SocialCountsJS / @author: Seon-Wook Park / @license: LGPLv3 */
 
 (function(){
-  var prot_chk  = /^[htfps]+:\/\/.*/,
-      prots_chk = /^[htf]+s:\/\/.*/,
+  var prot_chk  = /^\w+:\/\/.*/,
+      prots_chk = /^\w+s:\/\/.*/,
 
       // URL to Open Data Table
       odt_url = 'http://swook.github.io/SocialCountsJS/socialcounts.xml',
