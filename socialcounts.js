@@ -21,7 +21,8 @@
 /*! SocialCountsJS / @author: Seon-Wook Park / @license: LGPLv3 */
 
 (function(){
-	var prot_chk   = /^[htfps]+:\/\/.*/,
+	var prot_chk	= /^[htfps]+:\/\/.*/,
+			prots_chk = /^[htf]+s:\/\/.*/,
 
 	    // URL to Open Data Table
 	    odt_url    = 'http://swook.github.io/SocialCountsJS/socialcounts.xml',
@@ -29,9 +30,10 @@
 	    // Function which processes jsonp responses
 	    listenerId = 'socialcounts_receiver',
 
-	    // URL elements to use in constructing final query URL
-	    qurl_pre   = '//query.yahooapis.com/v1/public/yql?q=USE%20%27',
-	    qurl_post  = '%27%3B&format=json&jsonCompat=new&callback='+ listenerId,
+			// URL elements to use in constructing final query URL
+			qurl_pre = 'http' + (prots_chk.test(window.location.href) ? 's' : '') +
+								 '://query.yahooapis.com/v1/public/yql?q=USE%20%27',
+			qurl_post = '%27%3B&format=json&jsonCompat=new&callback='+ listenerId,
 
 	    // List of pending jobs
 	    job_list  = [];
