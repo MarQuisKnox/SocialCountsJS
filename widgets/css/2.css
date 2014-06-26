@@ -1,0 +1,22 @@
+/*
+   SocialCountsJS widget no. 2 CSS
+   - Written by Seon-Wook Park (http://www.swook.net/)
+   - Licensed under LGPLv3
+*/
+
+.social {
+  float: left;
+
+  height:      1.0rem;
+  width:       3.1rem;
+  padding-top: 3.2rem;
+}
+
+.social img.icon {
+  padding: .3rem;
+
+  top:    .1rem;
+  height: 2.5rem;
+  width:  2.5rem;
+}
+
