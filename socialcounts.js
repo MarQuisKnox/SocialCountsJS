@@ -144,11 +144,8 @@
           p = Math.pow(10, p - 1);
           num_str = (Math.round(num / p) * p).toString();
           data.counts[sn] = num_str.slice(0, 1)
-          if (num_str.slice(1, 3) !== "00") {
+          if (num_str.slice(1, 2) !== "0") {
             data.counts[sn] += '.'+ num_str.slice(1, 2);
-            if (num_str.slice(2, 3) !== "0") {
-              data.counts[sn] += num_str.slice(2, 3);
-            }
           }
         } else if (r === 1) {
           p = Math.pow(10, p - 1);
