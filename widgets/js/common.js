@@ -144,6 +144,7 @@
 
       // Set share text
       svc.sl.innerHTML = svc.stxt;
+      svc.cl.innerHTML = svc.cdesc;
 
       if ("widgetType" in window && window.widgetType === "Button") {
         // Set hover handler for placing button iframe
