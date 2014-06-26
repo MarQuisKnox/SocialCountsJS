@@ -106,12 +106,19 @@
     window.open(svc.surl + encodeURIComponent(url));
   };
 
-  // Store DOMElement references per social network
+  // Store DOMElement references per social network.
+  //
+  // A widget can set settings by declaring variables such as:
+  //   black      = true:     Use black icons
+  //   widgetType = "Button": Use iFrame buttons instead of share links
+  //
   var svcs = [];
   {
     var svc,
         el,
-        tmpl = _.template("<img class=\"icon\" src=\"img/<%= shortName %>-64.png\">" +
+        tmpl = _.template("<img class=\"icon\" src=\"img/<%= shortName %>-64" +
+                          ("black" in window && window.black === true ? "-black" : "") +
+                          ".png\">" +
                           "<span class=\"counts\">&#x22EF;</span>" +
                           "<span class=\"clabel\"></span>" +
                           "<span class=\"sharelbl\"></span>");
