@@ -90,7 +90,7 @@
       cdesc: "stumbles", cdescs: "stumble",
       stxt: "Stumble",
       surl: "https://www.stumbleupon.com/submit?url=",
-      burl: "http://badge.stumbleupon.com/badge/embed/3/?url=<%= url %>"
+      bimg: "img/btn_stumbleupon.png"
     },
     delicious: {
       name: "Delicious",
@@ -103,7 +103,7 @@
       cdesc: "pins", cdescs: "pin",
       stxt: "Pin",
       surl: "https://pinterest.com/pin/create/button/?url=",
-      bimg: "https://assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png"
+      bimg: "img/btn_pinterest.png"
     }
   };
 
