@@ -9,23 +9,19 @@ body {
   margin:  0;
 }
 
-.social {
+div.social {
   position: relative;
+  float:    left;
   cursor:   pointer;
 
   text-decoration: none;
   text-align:      center;
   font-family:     sans-serif,Arial,Verdana,Helvetica;
-  color:           white;
-  font-size:       .9rem;
-  line-height:     .9rem;
 
   margin:   0;
-  padding: .55rem 0;
-  height:  .9rem;
 }
 
-.social img.icon {
+div.social img.icon {
   position: absolute;
   display:  block;
   float:    left;
@@ -33,6 +29,38 @@ body {
   left:     0;
   width:    2rem;
   height:   2rem;
+}
+
+div.social span.counts {
+  display:     block;
+  color:       white;
+  font-size:   90%;
+  line-height: 90%;
+
+  transition: opacity .8s ease-out;
+}
+
+div.social:hover span.counts {
+  opacity: 0;
+}
+
+div.social span.clabel {
+  display: none;
+}
+
+div.social span.sharelbl {
+  display:     block;
+  position:    absolute;
+  opacity:     0;
+  color:       white;
+  font-size:   90%;
+  line-height: 90%;
+
+  transition: opacity .8s ease-out;
+}
+
+div.social:hover span.sharelbl {
+  opacity: 1;
 }
 
 #googleplus { background-color: #dc4b39; }
