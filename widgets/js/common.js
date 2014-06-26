@@ -169,8 +169,8 @@
       _.each(svcs, function(svc) {
         c = data.counts[svc.shortName];
         svc.c.innerHTML = c;
-        if (c === 1) svc.cl.innerHTML = svc.cdescs;
-        else         svc.cl.innerHTML = svc.cdesc;
+        if (c === "1") svc.cl.innerHTML = svc.cdescs;
+        else           svc.cl.innerHTML = svc.cdesc;
       });
     });
   };
