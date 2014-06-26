@@ -84,6 +84,7 @@ div.social span.button img {
 }
 
 div.social span.button img {
+  cursor:     pointer;
   margin-top: -1.5rem;
 }
 
