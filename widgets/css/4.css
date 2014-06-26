@@ -1,0 +1,35 @@
+/*
+   SocialCountsJS widget no. 3 CSS
+   - Written by Seon-Wook Park (http://www.swook.net/)
+   - Licensed under LGPLv3
+*/
+
+div.social {
+  width:   5.2rem;
+  height:  .9rem;
+  padding: .6rem 0;
+
+  color:            white;
+  background-color: transparent !important;
+}
+
+div.social span.counts {
+  padding-left: 1.6rem;
+
+  color: inherit;
+}
+
+div.social span.sharelbl {
+  top:       .7rem;
+  left:      1.6rem;
+  width:     3.6rem;
+  height:    .7rem;
+  font-size: .7rem;
+
+  color: inherit;
+}
+
+div.social img.icon {
+  left: .1rem;
+}
+
