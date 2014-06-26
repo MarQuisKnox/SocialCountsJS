@@ -63,11 +63,63 @@ div.social:hover span.sharelbl {
   opacity: 1;
 }
 
-#googleplus { background-color: #dc4b39; }
+div.social span.button {
+  position:    absolute;
+  top:         0;
+  left:        0;
+  padding-top: 2rem;
+
+  width:  100%;
+
+  opacity:    0;
+  transition: opacity .5s ease-out;
+}
+
+div.social span.button iframe,
+div.social span.button img {
+  display:  block;
+  border:   0;
+  margin:   0 auto;
+  overflow: visible;
+}
+
+div.social span.button img {
+  margin-top: -1.5rem;
+}
+
+#facebook iframe {
+  height: 20px;
+  width:  49px;
+  margin: -24px auto 0 auto;
+}
+
+#twitter iframe {
+  height: 20px;
+  width:  59px;
+  margin: -24px auto 0 auto;
+}
+
+#googleplus iframe {
+  height: 24px;
+  width:  38px;
+  margin: -27px auto 0 auto;
+}
+
+#stumbleupon iframe {
+  height: 18px;
+  width:  65px;
+  margin: -22px auto 0 auto;
+}
+
+div.social:hover span.button {
+  opacity: 1;
+}
+
 #facebook { background-color: #4862a3; }
 #twitter { background-color: #00acee; }
-#linkedin { background-color: #0073b2; }
-#reddit { background-color: #336699; }
-#stumbleupon { background-color: #ea4b24; }
-#delicious { background-color: #3399ff; }
+#googleplus { background-color: #dc4b39; }
 #pinterest { background-color: #c52227; }
+#linkedin { background-color: #0073b2; }
+#stumbleupon { background-color: #ea4b24; }
+#reddit { background-color: #336699; }
+#delicious { background-color: #3399ff; }

@@ -1,0 +1,59 @@
+/*
+   SocialCountsJS widget no. 6 CSS
+   - Written by Seon-Wook Park (http://www.swook.net/)
+   - Licensed under LGPLv3
+*/
+
+div.social:first-of-type {
+  margin-left: 0;
+}
+
+div.social {
+  cursor: default;
+
+  height:  .9rem;
+  padding: .6rem 0;
+  margin-left: .6rem;
+
+  color:            black;
+  background-color: transparent !important;
+}
+
+div.social span.counts {
+  float:     left;
+  margin:    0 .1rem;
+  font-size: 1.2rem;
+
+  color: inherit;
+}
+
+div.social span.clabel {
+  position:    relative;
+  display:     inline-block;
+  margin-left: .2rem;
+
+  font-size:  90%;
+  opacity:    .8;
+  transition: opacity .8s ease-out;
+}
+
+div.social:hover span.clabel {
+  opacity: 0;
+}
+
+div.social span.sharelbl {
+  display: none;
+}
+
+div.social img.icon {
+  display: none;
+}
+
+#googleplus { color: #dc4b39; }
+#facebook { color: #4862a3; }
+#twitter { color: #00acee; }
+#linkedin { color: #0073b2; }
+#reddit { color: #336699; }
+#stumbleupon { color: #ea4b24; }
+#delicious { color: #3399ff; }
+#pinterest { color: #c52227; }
