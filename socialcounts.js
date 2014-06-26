@@ -31,15 +31,15 @@
       listenerId = 'socialcounts_receiver',
 
       // URL elements to use in constructing final query URL
-      qurl_pre = 'http' + (prots_chk.test(window.location.href) ? 's' : '') +
-                 '://query.yahooapis.com/v1/public/yql?q=USE%20%27',
-      qurl_post = '%27%3B&format=json&jsonCompat=new&callback='+ listenerId,
+      qurl_pre =  'http' + (prots_chk.test(window.location.href) ? 's' : '') +
+                  '://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('USE \''),
+      qurl_post = encodeURIComponent('\';') + '&format=json&jsonCompat=new&callback='+ listenerId,
 
       // List of pending jobs
       job_list = [];
 
   // Add URL to Open Data Table (ODT) file.
-  qurl_pre += encodeURIComponent(odt_url) +'%27%20AS%20tbl%3B%20SELECT%20*%20FROM%20tbl%20WHERE%20url%3D%27';
+  qurl_pre += encodeURIComponent(odt_url + '\' AS tbl; SELECT * FROM tbl WHERE url=\'');
 
   // Main function, used by providing url (optional) and function to run
   // post-request. Function f takes one parameter, an object:
