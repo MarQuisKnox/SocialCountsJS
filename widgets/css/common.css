@@ -75,6 +75,10 @@ div.social span.button {
   transition: opacity .5s ease-out;
 }
 
+div.social:hover span.button {
+  opacity: 1;
+}
+
 div.social span.button iframe,
 div.social span.button img {
   display:  block;
@@ -85,35 +89,25 @@ div.social span.button img {
 
 div.social span.button img {
   cursor:     pointer;
-  margin-top: -1.5rem;
+  margin-top: -1.6rem;
 }
 
 #facebook iframe {
   height: 20px;
   width:  49px;
-  margin: -24px auto 0 auto;
+  margin: -26px auto 0 auto;
 }
 
 #twitter iframe {
   height: 20px;
   width:  59px;
-  margin: -24px auto 0 auto;
+  margin: -26px auto 0 auto;
 }
 
 #googleplus iframe {
   height: 24px;
   width:  38px;
-  margin: -27px auto 0 auto;
-}
-
-#stumbleupon iframe {
-  height: 18px;
-  width:  65px;
-  margin: -22px auto 0 auto;
-}
-
-div.social:hover span.button {
-  opacity: 1;
+  margin: -28px auto 0 auto;
 }
 
 #facebook { background-color: #4862a3; }
