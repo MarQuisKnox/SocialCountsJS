@@ -121,7 +121,7 @@
 					.accept('application/json').timeout(timeout).get();
 				y.rest("http://urls.api.twitter.com/1/urls/count.json?url="+url[i], twitter)
 					.accept('application/json').timeout(timeout).get();
-				y.rest("http://www.linkedin.com/countserv/count/share?format=json&url="+url[i], linkedin)
+				y.rest("https://www.linkedin.com/countserv/count/share?format=json&url="+url[i], linkedin)
 					.accept('application/json').timeout(timeout).get();
 				// y.rest("http://www.reddit.com/api/info.json?url="+url[i], reddit).accept('application/json')
 				// y.rest(".header('User-Agent', UA).timeout(timeout).get();
